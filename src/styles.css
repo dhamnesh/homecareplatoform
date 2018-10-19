@@ -1,0 +1,1063 @@
+/* Home Care AideCustom CSS */
+
+/* Side bar starts */
+
+.m-aside-left.m-aside-left--skin-dark {
+    height: 100% !important;
+}
+
+.m-aside-menu .m-menu__nav {
+    position: fixed;
+    width: 255px;
+}
+
+/* Care Giver starts */
+
+.header-user-greet {
+    position: relative;
+    top: 14px;
+    margin-left: -5px;
+}
+
+.header-user-name {
+    color: #279fdf;
+    position: relative;
+    top: 6px;
+    padding-left: 0;
+    margin-left: -2px;
+}
+
+.vr {
+    transform: rotate(90deg);
+}
+
+.borderless td,
+.borderless th,
+.borderless tr {
+    border: none !important;
+}
+
+.borderless td,
+.borderless th,
+.borderless tr {
+    padding: 13px !important;
+}
+
+.borderless thead tr {
+    cursor: pointer !important;
+}
+
+.active-status {
+    color: lightgreen;
+    padding-left: 18px;
+}
+
+.care-giver-table .fa-sort {
+    font-size: 12px;
+    color: #00020a63;
+}
+
+.add-care-river-btn {
+    border-radius: 3px !important;
+}
+
+.ui-widget-header {
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%) !important;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    border-bottom: 1px solid #d5d5d5 !important;
+}
+
+.ui-dialog-titlebar-close {
+    color: gray !important;
+}
+
+.next-btn {
+    background-color: #72d976 !important;
+    color: #fff !important;
+}
+
+.add-user-modal.ui-dialog {
+    width: 85% !important;
+}
+
+.short-datepicker .ui-datepicker.ui-widget {
+    width: 160% !important;
+}
+
+.ui-datepicker.ui-widget {
+    width: 100% !important;
+}
+
+#availability .ui-multiselect .ui-multiselect-label-container {
+    height: 30px !important;
+}
+
+.ui-dialog {
+    /* z-index: 1004 !important; */
+}
+
+.ui-dialog-footer {
+    /* position: absolute !important; */
+    width: 100% !important;
+    bottom: 0 !important;
+}
+
+.ui-dialog.ui-widget .ui-dialog-content {
+    height: 100% !important;
+}
+
+.modal-footer {
+    float: right !important;
+    width: 100%;
+}
+
+/* Button */
+
+.btn.m-btn--gradient-from-success.m-btn--gradient-to-accent {
+    background: #72d976 !important;
+}
+
+/* tabs */
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.modal-steps {
+    padding: 30px;
+}
+.active-two{
+    background-color: #72d976  !important;
+}
+.modal-stepper .step-1 .circle.active {
+    background-color: #72d976;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    color: #fff;
+    border: none !important;
+}
+
+.modal-stepper .step-1 .circle {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    color: gray;
+    border: 1px solid gray !important;
+}
+
+.modal-stepper .step-1 .text .heading {
+    font-weight: bold;
+}
+
+.modal-stepper .step-1 .text .desc {}
+
+.modal-stepper .step-1 .circle .number {
+    text-align: center;
+    position: absolute;
+    top: 13px;
+    left: 20px;
+}
+
+.modal-stepper .step-1 .text {
+    position: absolute;
+    top: -3px;
+    left: 68px;
+}
+
+.modal-stepper .step-1 hr {
+    width: 37%;
+    position: relative;
+    top: -39px;
+    left: 124px;
+}
+
+.modal-auto-complete {
+    padding: 75px 215px;
+    padding-top: 147px;
+    padding-bottom: 242px;
+    /* padding: 209px 314px */
+}
+
+.modal-auto-complete label {
+    font-weight: 100;
+    color: #888888;
+}
+
+.ui-autocomplete-token {
+    background-color: #ededed !important;
+    color: #888888 !important;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-list-item.ui-state-highlight {
+    background-color: #ededed !important;
+    color: #888888 !important;
+}
+
+.ui-dropdown {
+    width: 100% !important;
+}
+
+.modal-availability {
+    padding-top: 30px;
+    padding-bottom: 242px;
+    /* padding: 208px 195px; */
+}
+
+.modal-availability .time-pickers {
+    text-align: left;
+}
+
+.btn-add-more-availability {
+    color: #5ac5ff;
+    background-color: #fff;
+    font-size: 22px;
+    border-color: #d6d6d6 !important;
+    height: 30px;
+    text-align: center;
+    padding: 0 10px !important;
+    margin-left: 10px;
+}
+
+.minus {
+    padding: 0 11px !important;
+}
+
+.add-user .minus {
+    padding: 0 12px !important;
+}
+
+.p-b-10 {
+    padding-bottom: 10px;
+}
+
+.avail-label {
+    font-weight: 100;
+    color: #888888;
+    position: absolute;
+    left: 5%;
+    margin-top: -20px;
+}
+
+.time-duration-label {
+    font-weight: 100;
+    color: #888888;
+    position: absolute;
+    margin-top: -20px;
+    left: 57%;
+}
+
+.modal-appointment{
+    margin-bottom: 140px
+}
+
+#basic-details .ui-calendar {
+    padding: 0 !important;
+}
+
+.ui-widget-header .ui-button,
+.ui-widget-content .ui-button,
+.ui-widget.ui-button,
+.ui-button {
+    color: #999999 !important;
+    background: #fff !important;
+    border: 1px solid #999999 !important;
+}
+
+.care-giver-image-upload {
+    height: 50% !important;
+}
+
+.care-giver-image-upload .ui-widget-header .ui-button,
+.care-giver-image-upload .ui-widget-content .ui-button,
+.care-giver-image-upload .ui-widget.ui-button,
+.care-giver-image-upload .ui-button {
+    margin-top: -3px !important;
+}
+
+.upload-folfer-icon {
+    position: absolute;
+    right: 24px;
+    color: #999999 !important;
+}
+
+.modal-footer-btn {
+    float: right;
+}
+
+.p-10 {
+    padding: 10px !important;
+}
+
+.p-20 {
+    padding: 20px !important;
+}
+
+.availability-row {
+    text-align: center !important;
+    display: block !important;
+    /* margin-left: -75px !important; */
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+}
+
+.text-danger {
+    font-size: 11px !important;
+    position: absolute;
+}
+
+.date-of-birt-icon {
+    position: absolute;
+    right: 24px;
+    top: 39px;
+}
+
+.disabled-button {
+    opacity: 0.6 !important;
+}
+
+/* View/Edit User */
+
+.extra-height-claendar.ui-inputtext {
+    height: 37px !important;
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.blue-background {
+    z-index: 1;
+    position: relative !important;
+    width: 100%;
+    padding: 0 !important;
+}
+
+.user-view-row {
+    margin-top: 45px;
+    padding-left: 0;
+    color: #fff;
+}
+
+.user-view-row .number-label {
+    color: #156997;
+}
+
+.user-view-row .email-add {
+    color: #e2e87e;
+}
+
+.user-image {
+    width: 74%;
+    height: 74%;
+    margin: 30px 34px;
+    margin-bottom: 104px;
+    border: 3px solid #1f80b3;
+    border-radius: 3px;
+}
+
+.user-view-left-block {
+    margin-left: -3%;
+}
+
+.user-view-top-block {
+    margin-top: 2%;
+}
+
+.dialog-box {
+    position: relative;
+    z-index: 10;
+    /* top: 125px; */
+    background-color: #fff;
+    margin-top: -65px;
+    border-radius: 4px;
+}
+
+.view-user-row {
+    position: absolute;
+    top: 40px;
+    left: -50px;
+}
+
+.switch {
+    padding-left: 0;
+    margin-top: 4px;
+}
+
+.tab-header {
+    padding: 25px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.tab-header div {}
+
+.user-summary {
+    margin: 74px;
+    margin-top: 28px;
+}
+
+.user-summary .row {
+    padding: 8px;
+}
+
+.user-summary-heading {
+    font-size: 14px;
+    color: #a1a1a1;
+}
+
+.bottom-border-green {
+    border-bottom: 2px solid #72d976;
+    color: #525252 !important;
+}
+
+.user-view-header {
+    padding-bottom: 15px;
+    color: #949494;
+    cursor: pointer;
+}
+
+.user-view-hr-line {
+    margin-top: -26px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.user-view-tab-content {
+    padding: 20px;
+}
+
+.user-view-edit-button {
+    cursor: pointer;
+    color: #949494;
+}
+
+.edit-profile .ui-calendar {
+    padding: 0 !important;
+}
+
+.user-view-availability {
+    padding-top: 13px !important;
+    padding-left: 19px !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+}
+
+.user-view-availability .availability-row {
+    padding-left: 5px !important;
+}
+
+.add-user .availability-row {
+    margin-left: -75px !important;
+}
+
+.user-view-availability .ui-multiselect .ui-multiselect-label-container {
+    height: 30px !important
+}
+
+.user-view-header-left-back {
+    color: #949494;
+    cursor: pointer;
+}
+
+.user-view-header-left-back i {
+    padding-right: 10px;
+}
+
+.user-view-header-container {
+    padding-bottom: 15px;
+    text-align: left;
+}
+
+.p-b-20 {
+    padding-bottom: 20px !important;
+}
+
+.p-40 {
+    padding: 40px !important;
+}
+
+.p-t-20 {
+    padding-top: 20px !important;
+}
+
+.p-r-20 {
+    padding-right: 20px !important;
+}
+
+.update-btn {
+    text-align: right;
+}
+
+.edit-user.user-view-availability {
+    padding-top: 0 !important;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.active-btn {
+    pointer-events: all;
+    opacity: 1.0;
+}
+
+.disabled .ui-multiselect .ui-multiselect-trigger .fa {
+    pointer-events: all !important;
+}
+
+.custom-height {
+    height: 36px !important;
+}
+
+.c-h-28 {
+    height: 28px !important;
+}
+
+.botton-align {
+    padding-bottom: 0 !important;
+    margin-bottom: -14px !important;
+}
+
+.display-name {
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.caregiver-info-container {
+    background-color: #f2f3f8;
+}
+
+.white-box {
+    background-color: #fff;
+}
+
+.m--img-rounded {
+    border-radius: 4px !important;
+}
+
+.m_datetimepicker_1 {
+    z-index: 1050 !important;
+}
+.no-padding{
+    padding: 0 !important;
+}
+.width-10{
+    width: 10% !important;
+}
+/* ngPrime Table start */
+.ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tfoot > tr > td{
+    background: #fff !important;
+}
+.ui-table .ui-paginator-bottom{
+    border: 0 !important;
+}
+.ui-table .ui-sortable-column.ui-state-highlight {
+    color: black !important;
+}
+.ui-paginator {
+    padding: 2.125em !important;
+}
+.ui-table .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+    color: black !important;
+}
+.ui-paginator .ui-paginator-page.ui-state-active {
+    color: #279fdf !important;
+    background: #fff !important;
+    border-color: #fff !important;
+    border-top-color: #279fdf !important;
+}
+.ui-paginator a:not(.ui-state-disabled):not(.ui-state-active):hover {
+    border-color: #fff !important;
+    background: #fff !important;
+    color: #212121 !important;
+    border-top-color: #555555 !important;
+}
+.ui-paginator a:not(.ui-state-disabled):not(.ui-state-active) {
+    border-color: #fff !important;
+    background: #fff !important;
+    color: #212121 !important;
+}
+/* ngPrime Table end */
+.m-subheader {
+    padding: 25px 30px 0 30px !important;
+}
+.m-body .m-content {
+    padding: 25px 30px !important;
+}
+.m-topbar .m-topbar__nav.m-nav>.m-nav__item>.m-nav__link{
+    height: 60px !important;
+    top: 4px !important;
+    right: -6px !important;
+}
+.m-topbar .m-topbar__nav.m-nav>.m-nav__item>.m-nav__link .m-topbar__userpic{
+    border-radius: 50% !important;
+    background-color: #6e9ed2 !important;
+    width: 40px !important;
+    text-transform: uppercase !important;
+    font-size: 22px !important;
+    color: #fff !important;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+
+
+/* For desktops only */
+
+@media not all and (max-width: 768px) {
+    .loggedin-user-info-box {
+        position: relative !important;
+        right: -80px !important;
+    }
+}
+
+/* Mobile View */
+
+@media only screen and (max-width: 768px) {
+    .user-image {
+        margin-bottom: 0;
+    }
+    .dialog-box {
+        margin-top: 0;
+    }
+    .user-view-row {
+        margin-top: 0;
+        text-align: center;
+    }
+    .user-view-left-block {
+        margin-left: 0;
+    }
+    .bottom-border-green {
+        border-bottom: none;
+        color: #72d976 !important;
+    }
+    .user-view-tab-content {
+        padding-top: 0;
+    }
+}
+
+/* Side bar */
+
+@media (min-width: 1025px) {
+    .m-aside-left--minimize .m-aside-menu .m-menu__nav {
+        position: fixed;
+        width: 80px;
+    }
+}
+
+/*################ dashboard page css ###################*/
+
+.sub-header-text{
+    color: #babbbd;
+    font-weight: bold;
+}
+.dashboard-section .col-p5{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.dashboard-section .four-equal-section{
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    background-color: #fff;
+    font-size: 12px;
+    color: #9d9c9c;
+    font-weight: bold;
+    position: relative;
+    font-family: 'Roboto';
+}
+.dashboard-section .four-equal-section span{
+    display: block;
+    font-size: 22px;
+    font-weight: normal;
+    color: #474747;
+}
+.dashboard-section .four-equal-section p{
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-top: 1px solid #f4ecec;
+    padding-top: 8px;
+    font-size: 11px;
+    font-weight: normal;
+}
+.dashboard-section .four-equal-section p img{
+    width: 12px;
+}
+.dashboard-section .four-equal-section .green-div,
+.dashboard-section .four-equal-section .blue-div,
+.dashboard-section .four-equal-section .orange-div,
+.dashboard-section .four-equal-section .red-div{
+    height: 80px;
+    width: 80px;
+    border-radius: 5px;
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    text-align: center;
+    line-height: 80px;
+}
+.dashboard-section .four-equal-section .green-div img,
+.dashboard-section .four-equal-section .blue-div img,
+.dashboard-section .four-equal-section .orange-div img,
+.dashboard-section .four-equal-section .red-div img{
+    width: 35px;
+}
+.dashboard-section .four-equal-section .green-div{
+    background-color: #4aa54e;
+}
+.dashboard-section .four-equal-section .blue-div{
+    background-color: #09b2c7;
+}
+.dashboard-section .four-equal-section .orange-div{
+    background-color: #fb930a;
+}
+.dashboard-section .four-equal-section .red-div{
+    background-color: #e7413e;
+}
+.zencare-info,.app-graph,.profit-share{
+    padding: 20px;
+    float: left;
+    background-color: #fff;
+    width: 33.33%;
+    border-right: 1px solid #f4ecec;
+}
+
+.zencare-info{
+    border-radius: 5px 0 0 5px;
+}
+.profit-share{
+    border-right: 0;
+    border-radius: 0 5px 5px 0;
+}
+.zencare-info .text-heading,.app-graph .text-heading,.profit-share .text-heading{
+    font-size: 14px;
+    color: #474747;
+    font-family: 'Roboto';
+    font-weight: bold;
+}
+.zencare-info p,.app-graph p,.profit-share p{
+    font-size: 11px;
+    font-style: italic;
+    color: #a3a3a3;
+    margin-bottom: 0;
+    margin-top: -4px;
+}
+.zencare-info > div{
+    padding: 15px 10px 15px 0px;
+    margin-left: 10px;
+    border-top: 1px solid #f4ecec;
+}
+.zencare-info > div:first-child{
+    border-top: 0;
+}
+.mT10{
+    margin-top: 10px;
+}
+.green-text,.blue-text,.red-text{
+    display: block;
+    float: right;
+    position: relative;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    top: -15px;
+}
+.green-text{
+    color: #4aa54e;
+}
+.blue-text{
+    color: #09b2c7;
+}
+.red-text{
+    color: #e7413e;
+}
+.pR10{
+    padding-right: 10px;
+}
+.pL10{
+    padding-left: 10px;
+}
+.active-care-giver,.recent-appointments{
+    background-color: #fff;
+    border-radius: 5px;
+    width: 49.5%;
+    float: left;
+    margin-right: 1%;
+}
+.recent-appointments{
+    margin-right: 0;
+}
+.p0{
+    padding: 0 !important;
+}
+.active-care-giver .heading-text,.recent-appointments .heading-text{
+    font-size: 11px;
+    margin: 0;
+    color: #a3a3a3;
+    padding: 10px 15px;
+    border-bottom: 1px solid #f4ecec;
+}
+.active-care-giver .media,.recent-appointments .media{
+    padding: 10px 15px;
+    border-bottom: 1px solid #e9e7e7;
+}
+.active-care-giver .media .media-heading,.recent-appointments .media .media-heading{
+    font-size: 14px;
+    color: #474747;
+    font-family: 'Roboto';
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.active-care-giver .media .media-left,.recent-appointments .media .media-left{
+    margin-right: 5px;
+}
+.active-care-giver .media .media-object,.recent-appointments .media .media-object{
+    width: 30px;
+    border: 1px solid #e9e7e7;
+    border-radius: 2px;
+}
+.active-care-giver .media .media-body p,.recent-appointments .media .media-body p{
+    font-size: 11px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+/*############# css for ipad ##################*/
+
+@media screen and (max-width: 991px) and (min-width: 768px){
+    .dashboard-section .col-sm-6{
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .sm-mT30{
+        margin-top: 30px;
+    }
+}
+
+/*######################### css for mobile devices ###############*/
+
+@media (max-width: 767px){
+    .xs-mT30{
+        margin-top: 30px;
+    }
+    /*.m-body .m-content.dashboard-section{
+        padding: 25px 10px !important;
+    }*/
+}
+
+/*############ css for ipad and below ###########*/
+
+@media (max-width: 991px){
+    .zencare-info,.app-graph,.profit-share{
+        width: 100%;
+    }
+    .zencare-info > div{
+        margin-left: 0;
+    }
+    .active-care-giver, .recent-appointments{
+        margin: 0;
+        width: 100%;
+    }
+    .recent-appointments{
+        margin-top: 10px;
+    }
+    .app-graph, .profit-share{
+        margin-top: 10px;
+    }
+}
+.fisrt-div{
+    width: 40px;
+    height: 20px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background-color: red;
+    display: inline-block;
+}
+.second-div{
+    width: 40px;
+    height: 20px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background-color: green;
+    display: inline-block;
+}
+.third-div{
+    width: 40px;
+    height: 20px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background-color: blue;
+    display: inline-block;
+}
+
+/*########################## css for appointment calender ############################*/
+
+.appointment-section .fc-event,.appointment-section .fc-event-dot{
+    color: #747474 !important;
+    background-color: #fff !important;
+    padding: 5px !important;
+}
+
+.appointment-section .fc-event .fc-title{
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+.fc-event.event-success{
+    border: 1px solid #74d978;
+    border-radius: 2px;
+}
+.fc-event.event-default{
+    border: 1px solid #dedede;
+}
+.fc-event.event-not-available{
+    border: 1px solid #74d978;
+    border-top: 1px dashed #74d978;
+    border-bottom: 1px dashed #74d978;
+}
+.fc .fc-button-group .ui-state-active{
+    color: #2eb3fe !important;
+    font-size: 12px;
+    text-transform: capitalize;
+    background-color: #fff !important;
+}
+.appointment-section .ui-widget input,
+.appointment-section .ui-widget select,
+.appointment-section .ui-widget textarea,
+.appointment-section .ui-widget button.ui-state-default{
+    font-size: 12px;
+    color: #979799;
+    background: #f0f1f6 !important;
+    height: 30px;
+    text-transform: capitalize;
+    width: 100px;
+}
+.appointment-section .fc-prev-button.ui-button.ui-state-default{
+    width: 20px; border-right: 0 !important;
+}
+.appointment-section .fc-next-button.ui-button.ui-state-default{
+    width: 20px;border-left: 0 !important;
+}
+.fc-row .fc-content-skeleton{
+    max-height: 120px;
+}
+.appointment-section{
+    padding: 0 30px;
+    position: relative;
+    top: -50px;
+}
+.page-path{
+    font-size: 12px;
+    font-weight: 500;
+    color: #979799;
+}
+.fc-toolbar.fc-header-toolbar h2{
+    font-size: 16px;
+    line-height: 30px;
+}
+.ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button{
+    border: 1px solid rgba(153, 153, 153, 0.2) !important
+}
+.ui-widget-content,.ui-widget-header{
+    border-color: rgba(213, 213, 213, 0.3) !important;
+}
+.fc-toolbar.fc-header-toolbar{
+    margin-bottom: 25px;
+}
+.fc-day-header.ui-widget-header span{
+    display: inline-block;
+    padding: 10px;
+    color: #999999;
+    font-size: 12px;
+    font-weight: 500;
+}
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number{
+    float: left !important;
+}
+.fc .fc-row .fc-content-skeleton table, .fc .fc-row .fc-content-skeleton td, 
+.fc .fc-row .fc-helper-skeleton td{
+    padding: 5px 7px;
+    color: #999999;
+    font-weight: 500;
+    font-size: 12px;
+}
+.fc th{
+    text-align: left !important;
+}
+/*.fc-day-top.fc-sun.fc-today.ui-state-highlight*/
+
+.fc .fc-row .fc-content-skeleton table,
+.fc .fc-row .fc-content-skeleton td, 
+.fc .fc-row .fc-helper-skeleton td{
+    background-color: #fff !important;
+    border-color: rgba(213, 213, 213, 0.3) !important;
+}
+.fc-view>table{
+    -webkit-box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.15);
+}
+.fc-view{
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+/*############### css for client gender dropdown ##################*/
+
+.form-group.gender-form-group .ui-dropdown .ui-dropdown-label{
+    padding: 8px 14px;
+    line-height: 17px;
+}
+.form-group.gender-form-group .ui-dropdown .ui-dropdown-trigger{
+    height: 99%;
+}
+.form-group.gender-form-group .ui-dropdown .ui-dropdown-trigger .fa{
+    margin-top: 10px;    
+}

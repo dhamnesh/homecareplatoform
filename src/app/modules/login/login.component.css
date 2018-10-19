@@ -1,0 +1,10 @@
+.left-side{
+  background: rgba(235, 136, 20, 0.9);
+}
+.main-section{
+  height: 100vh;
+  text-align: center;
+}
+.right-side img{
+  margin-top: 20%;
+}

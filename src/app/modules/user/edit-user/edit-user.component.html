@@ -1,0 +1,545 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<app-add-appointment></app-add-appointment>
+<div *ngIf="userDetails" class="blue-background" style="background-image: url('../../assets/images/banners/blue_background.jpg')">
+  <span class="close-button" (click)="backClicked()">X</span>
+  <div class="row">
+    <div class="col-sm-2 col-md-2">
+      <div class="" *ngIf="userDetails.image">
+        <img class="user-image" height="150" width="150" src="{{imageUrl}}{{userDetails.image}}" />
+        <img class="user-image" height="150" width="150" src="../../../../assets/images/profile-images/no-avatar-male.png" />
+      </div>
+      <div class="" *ngIf="!userDetails.image && userDetails.gender == 'Female'">
+        <img class="user-image" height="150" width="150" src="../../../../assets/images/profile-images/no-avatar-female.png" />
+      </div>
+      <div class="" *ngIf="!userDetails.image && userDetails.gender == 'Male'">
+        <img class="user-image" height="150" width="150" src="../../../../assets/images/profile-images/no-avatar-male.png" />
+      </div>
+    </div>
+    <div class="col-sm-10 col-md-10 user-view-row">
+      <div class="row">
+        <!-- <h3 class="col-sm-4 col-md-4 col-xs-4">
+          {{ userDetails.first_name }} {{ userDetails.middle_name }} {{ userDetails.last_name }}
+        </h3> -->
+        <div class="col-sm-12 col-md-12 col-xs-12 ">
+          <!-- <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" #ev (change)="toggleAction(ev.checked)">
+          <label for="cmn-toggle-1"></label> -->
+          <span class="p-r-20 display-name"> {{ userDetails.first_name }}
+            <span *ngIf="userDetails.middle_name != 'undefined'"> {{ userDetails.middle_name }} </span> {{ userDetails.last_name }} </span>
+          <span class="m-switch m-switch--icon m-switch--success p-r-20">
+            <label class="botton-align">
+              <input checked="checked" name="" type="checkbox">
+              <span></span>
+            </label>
+          </span>
+        </div>
+        <h6 class="col-sm-12 col-md-12 email-add">{{ userDetails.username }}</h6>
+      </div>
+      <div class="row user-view-top-block">
+        <div class="col-sm-3">
+          <h6 class="number-label">Mobile Number</h6>
+          <h6>{{ userDetails.contact.work_phone || na }}</h6>
+          <!-- <h6 *ngIf="!userDetails.work_phone">Not Available</h6> -->
+        </div>
+        <div class="col-sm-4 user-view-left-block">
+          <h6 class="number-label">Home Phone Number</h6>
+          <h6>{{ userDetails.contact.home_phone || na }}</h6>
+          <!-- <h6 *ngIf="!userDetails.home_phone">Not Available</h6> -->
+        </div>
+        <div *ngIf="userRole == 'Patient'" class="col-sm-4 ">
+          <button type="button" class="pull-left btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent m-btn--air" (click)="openAddAppointmentModal('add_appointment')">
+            Add Appointment
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="userDetails && userRole" class="m-content ">
+  <div class="dialog-box m-portlet">
+    <div class="row tab-header">
+      <div class="col-sm-2 col-xs-2 user-view-header-container">
+        <span *ngIf="activeTab =='edit-profile'" class="user-view-header-left-back" (click)="toggleTab('profile')">
+          <i class="fa fa-arrow-left"></i>Back </span>
+      </div>
+      <div *ngIf="activeTab !='edit-profile'" id="summary-header" class="col-sm-4 col-xs-3 user-view-header" (click)="toggleTab('summary')"
+        [ngClass]="{'bottom-border-green' : activeTab =='summary'}">
+        Summary
+      </div>
+      <div *ngIf="activeTab !='edit-profile'" id="profile-header" class="col-sm-4 col-xs-3 user-view-header" (click)="toggleTab('profile')"
+        [ngClass]="{'bottom-border-green' : activeTab =='profile'}">
+        Profile
+      </div>
+      <div *ngIf="activeEdit" class="col-sm-2 col-xs-2 user-view-edit-button" (click)="toggleTab('edit-profile')">
+        <i class="fa fa-pencil"></i> Edit
+      </div>
+    </div>
+    <hr class="user-view-hr-line hidden-xs">
+    <div class="tab-content user-view-tab-content">
+      <div id="summary" *ngIf="userDetails && userRole" class="tab-pane active">
+        <div class="user-summary">
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">EMAIL ADDRESS</h6>
+            </div>
+            <div class="col-sm-4">
+              <span> {{ userDetails.primary_email || na}}</span>
+              <!-- <span *ngIf="!userDetails.primary_email">Not Available</span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">DATE OF BIRTH</h6>
+            </div>
+            <div class="col-sm-4">
+              <span>{{ userDetails.dob | date: 'M/d/yyyy'}} </span>
+              <!-- <span *ngIf="!userDetails.dob">Not Available</span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">SOCIAL SECURITY NUMBER</h6>
+            </div>
+            <div class="col-sm-4">
+              <span>{{ userDetails.contact.social_security_number || na }}</span>
+              <!-- <span *ngIf="!userDetails.social_security_number">Not Available</span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">ADDRESS</h6>
+            </div>
+            <div class="col-sm-4">
+              <span>{{ userDetails.contact.address || na }}</span>
+              <!-- <span *ngIf="!userDetails.address">Not Available</span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div *ngIf="userDetails.services" class="row">
+            <div class="col-sm-2">
+            </div>
+            <div *ngIf="userDetails.services" class="col-sm-4">
+              <h6 class="user-summary-heading">
+                <span *ngIf="userRole == 'Caregiver'">SPECIALITY </span>
+                <span *ngIf="userRole == 'Patient'">CARE PLAN </span>
+              </h6>
+            </div>
+            <div *ngIf="userDetails.services" class="col-sm-4">
+              <span *ngFor="let s of userDetails.services; let l = last">
+                {{s.description}}
+                <span *ngIf="!(l)  ">,</span>
+              </span>
+              <span *ngIf = "serviceLength < 1 && userRole != 'admin'"> {{na}}</span>
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <!-- <h6 class="user-summary-heading">AVAILABILITY</h6> -->
+            </div>
+            <div class="col-sm-4">
+              <!-- <span> -->
+              <!-- {{ userDetails.primary_email }}Not Available </span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="profile" *ngIf="userDetails && userRole" class="tab-pane">
+        <div class="user-summary">
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">FULL NAME</h6>
+            </div>
+            <div class="col-sm-4">
+              <span> {{ userDetails.first_name }} {{ userDetails.middle_name }} {{ userDetails.last_name }}</span>
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">FULL ADDRESS</h6>
+            </div>
+            <div class="col-sm-4">
+              <span>{{ userDetails.contact.address || na}} </span>
+              <span *ngIf="!userDetails.contact.address">Not Available</span>
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">SOCIAL SECURITY NUMBER</h6>
+            </div>
+            <div class="col-sm-4">
+              <span>{{ userDetails.contact.social_security_number || na}}</span>
+              <!-- <span *ngIf="!userDetails.social_security_number">Not Available</span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div *ngIf="userDetails.services && userRole" class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <h6 class="user-summary-heading">
+                <span *ngIf="userRole && userRole == 'Caregiver'">SPECIALITY </span>
+                <span *ngIf="userRole && userRole == 'Patient'">CARE PLAN </span>
+              </h6>
+            </div>
+            <div class="col-sm-4">
+              <span *ngFor="let s of userDetails.services; let l = last">
+                {{s.description }}
+                <span *ngIf="!(l)">,</span>
+              </span>
+              <span *ngIf = "serviceLength < 1 && userRole != 'admin'"> {{na}}</span>
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+              <!-- <h6 class="user-summary-heading">AVAILABILITY</h6> -->
+            </div>
+            <div class="col-sm-4">
+              <!-- <span> -->
+              <!-- {{ userDetails.primary_email }}Not Available </span> -->
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="edit-profile" *ngIf="userDetails && userRole" class="tab-pane edit-profile">
+        <form #f3="ngForm" (ngSubmit)="updateUser()" validate>
+          <div class="col-md-12">
+            <h6 class="p-b-20">BASIC DETAILS</h6>
+            <!-- <form #f3="ngForm" (ngSubmit)="updateUser()"> -->
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>FIRST NAME</label>
+                <input name="fristName" [(ngModel)]="updatedUserData.first_name" #fristName="ngModel" type="text" class="form-control" placeholder="First name"
+                  required>
+                <div *ngIf="fristName.invalid && fristName.touched">
+                  <div *ngIf="fristName.errors.required" class="text-danger">
+                    <div>First name is required.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>MIDDLE NAME</label>
+                <input name="middleName" [(ngModel)]="updatedUserData.middle_name" #middleName="ngModel" type="text" class="form-control"
+                  placeholder="Middle name">
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>LAST NAME</label>
+                <input name="lastName" [(ngModel)]="updatedUserData.last_name" #lastName="ngModel" type="text" class="form-control" placeholder="Last name"
+                  required>
+                <div *ngIf="lastName.invalid && lastName.touched" class="text-danger">
+                  <div *ngIf="lastName.errors.required">
+                    <div>Last name is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>DATE OF BIRTH</label>
+
+                <p-calendar name="dateOfBirth" [(ngModel)]="updatedUserData.dob" styleClass="col-md-12" placeholder="MM/DD/YYYY" required [yearNavigator] = "true" yearRange = "1900:2020"
+                  #dateOfBirth="ngModel" inputStyleClass="form-control extra-height-claendar"></p-calendar>
+                <i class="fa fa-calendar date-of-birt-icon"></i>
+                <div *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="text-danger">
+                  <div *ngIf="dateOfBirth.errors.required">
+                    <div>Date of birth is required.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>USERNAME</label>
+                <input name="username" [(ngModel)]="updatedUserData.user_name " #username="ngModel" type="text" class="form-control" placeholder="Username"
+                  required readonly>
+                <div *ngIf="username.invalid && username.touched" class="text-danger">
+                  <div *ngIf="username.errors.required">
+                    <div>Username name is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>DISPLAY NAME</label>
+                <input name="displayName" [(ngModel)]="updatedUserData.display_name" #displayName="ngModel" type="text" class="form-control"
+                  placeholder="Display name" required>
+                <div *ngIf="displayName.invalid && displayName.touched" class="text-danger">
+                  <div *ngIf="displayName.errors.required">
+                    <div>Dispaly name is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>GENDER</label>
+                <p-dropdown name="gender" [options]="genderArray" [(ngModel)]="updatedUserData.gender" styleClass="custom-height" optionLabel="name"
+                  #gender="ngModel" [showClear]="false" required></p-dropdown>
+                <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+                  <div *ngIf="gender.errors.required">
+                    <div>Gender is required.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label>PHOTO</label>
+                <div class="form-control care-giver-image-upload">
+                  <input name="files" type="file" ng2FileSelect [uploader]="uploader" [(ngModel)]="updatedUserData.image" />
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>SOCIAL SECURITY NUMBER</label>
+                <input name="ssn" [(ngModel)]="updatedUserData.contact.social_security_number" #ssn="ngModel" type="number" class="form-control" placeholder="Social security number"
+                  required>
+                <div *ngIf="ssn.invalid && ssn.touched" class="text-danger">
+                  <div *ngIf="ssn.errors.required">
+                    <div>Social security number name is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>HOME PHONE</label>
+                <input name="homePhone" [(ngModel)]="updatedUserData.contact.home_phone" #homePhone="ngModel" type="number" class="form-control" placeholder="Home phone"
+                  required>
+                <div *ngIf="homePhone.invalid && homePhone.touched" class="text-danger">
+                  <div *ngIf="homePhone.errors.required">
+                    <div>Home phone number is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>WORK PHONE</label>
+                <input name="workPhone" [(ngModel)]="updatedUserData.contact.work_phone" #workPhone="ngModel" type="number" class="form-control" placeholder="Work phone"
+                  required>
+                <div *ngIf="workPhone.invalid && workPhone.touched">
+                  <div *ngIf="workPhone.errors.required" class="text-danger">
+                    <div>Work phone number is required.</div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-4 form-group">
+                <label>EMERGENCY CONTACT </label>
+                <input name="emergencyContact" [(ngModel)]="updatedUserData.contact.emergency_contact" #emergencyContact="ngModel" type="number" class="form-control"
+                  placeholder="Emergency contact" required>
+                <div *ngIf="emergencyContact.invalid && emergencyContact.touched" class="text-danger">
+                  <div *ngIf="emergencyContact.errors.required">
+                    <div>Emergency contact number is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>EMAIL ADDRESS </label>
+                <input name="emailAddress" [(ngModel)]="updatedUserData.primary_email" #emailAddress="ngModel" type="text" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" class="form-control"
+                  placeholder="Email address" required>
+                <div *ngIf="emailAddress.invalid && emailAddress.touched" class="text-danger">
+                  <div *ngIf="emailAddress.errors.required">
+                    <div>Email address is required.</div>
+                  </div>
+                  <div *ngIf="emailAddress.errors.pattern">
+                    <div>Email address is invalid.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label> ADDRESS</label>
+                <input name="address" [(ngModel)]="updatedUserData.contact.address" #address="ngModel" type="text" class="form-control" placeholder="Address"
+                  required>
+                <div *ngIf="address.invalid && address.touched" class="text-danger">
+                  <div *ngIf="address.errors.required">
+                    <div>Address is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>ADDRESS 2 </label>
+                <input name="address2" [(ngModel)]="updatedUserData.contact.address2" #address2="ngModel" type="text" class="form-control" placeholder="Address 2">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 form-group">
+                <label> CITY</label>
+                <input name="city" [(ngModel)]="updatedUserData.contact.city" #city="ngModel" type="text" class="form-control" placeholder="City"
+                  required>
+                <div *ngIf="city.invalid && city.touched" class="text-danger">
+                  <div *ngIf="city.errors.required">
+                    <div>City name is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 form-group">
+                <label> PINCODE</label>
+                <input name="pincode" [(ngModel)]="updatedUserData.contact.pincode" #pincode="ngModel" type="text" class="form-control" placeholder="Pincode"
+                  required>
+                <div *ngIf="pincode.invalid && pincode.touched" class="text-danger">
+                  <div *ngIf="pincode.errors.required">
+                    <div>Pincode is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 form-group">
+                <label> STATE</label>
+                <input name="state" [(ngModel)]="updatedUserData.contact.state" #state="ngModel" type="text" class="form-control" placeholder="State"
+                  required>
+                <div *ngIf="state.invalid && state.touched" class="text-danger">
+                  <div *ngIf="state.errors.required">
+                    <div>State name is required.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 form-group">
+                <label> COUNTRY</label>
+                <input name="country" [(ngModel)]="updatedUserData.contact.country" #country="ngModel" type="text" class="form-control" placeholder="Country"
+                  required>
+                <div *ngIf="country.invalid && country.touched" class="text-danger">
+                  <div *ngIf="country.errors.required">
+                    <div>Country name is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-12 form-group update-btn">
+              <button type="submit" [disabled]="f3.invalid" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder add-care-river-btn next-btn">
+                Update
+              </button>
+            </div> -->
+            <!-- </form> -->
+
+            <div *ngIf="userRole != 'admin'" class="row">
+              <div *ngIf="userDetails.services" class="col-md-12">
+                <h6 class="p-b-20">SPECIALITY</h6>
+                <span class="ui-fluid update-speciality">
+                  <p-autoComplete [suggestions]="filteredSpecialities" (completeMethod)="filterSpeciality($event);" styleClass="wid100" [minLength]="1"
+                    placeholder="Speciality" field="description" [multiple]="true" [(ngModel)]="specialities" name="specialities[]"
+                    optionLabel="description" (onUnselect)="removeSpeciality($event.speciality)" #specialities1="ngModel" required>
+                  </p-autoComplete>
+                </span>
+                <div *ngIf="specialities1.invalid && specialities1.touched" class="text-danger">
+                  <div *ngIf="specialities1.errors.required">
+                    <div>Please select at least one speciality.</div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12 form-group update-btn p-t-20">
+              <button type="button" [disabled]="specialities1.invalid" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder add-care-river-btn next-btn"
+                (click)="updateSpeciality()">
+                Update
+              </button>
+            </div> -->
+              </div>
+            </div>
+           
+            <div *ngIf="userDetails.schedules" class="row">
+              <div *ngIf="userRole != 'admin' && groupedAvailabilities && tooglee" class="col-md-12 user-view-availability edit-user">
+                <h6 class="p-b-20 p-t-20">AVAILABLILITY</h6>
+                <div *ngFor="let i of groupedAvailabilities; let j = index let l = last" class="row availability-row" [ngClass]="{'disabled': (j < existingAvailLength) && (!existingAvailFlag)}">
+                  <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-3">
+                      <p-multiSelect [options]="weekdays" [(ngModel)]="groupedAvailabilities[j].weekdays" #weekdays1="ngModel" name="weekdays1{{j}}"
+                        required [filter]="false" optionLabel="name" [maxSelectedLabels]="1" defaultLabel="Week days" required>
+                      </p-multiSelect>
+                      <div *ngIf="(weekdays1.invalid && weekdays1.touched)" class="text-danger">
+                        <div>
+                          <div class="avail-error">Please select week days.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2 short-datepicker">
+                      <p-calendar [(ngModel)]="groupedAvailabilities[j].from_date" #fromDate="ngModel" name="fromDate{{j}}" readonlyInput="false"
+                        required placeholder="From Date"></p-calendar>
+                      <div *ngIf="(fromDate.invalid && fromDate.touched)|| (toDate.invalid && toDate.touched)" class="text-danger">
+                        <div>
+                          <div class="avail-error">Please select complete availability.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2 short-datepicker">
+                      <p-calendar [(ngModel)]="groupedAvailabilities[j].to_date" #toDate="ngModel" name="toDate{{j}}" [minDate]="groupedAvailabilities[j].from_date" readonlyInput="true" required
+                        placeholder="To Date"></p-calendar>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                      <p-calendar [(ngModel)]="groupedAvailabilities[j].start_time" #fromTime="ngModel" name="fromTime{{j}}" [timeOnly]="true" placeholder="Start time"
+                        required></p-calendar>
+                      <div *ngIf="(fromTime.invalid && fromTime.touched) || (toTime.invalid && toTime.touched)" class="text-danger">
+                        <div>
+                          <div class="avail-error">Please select complete time duration.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                      <p-calendar [(ngModel)]="groupedAvailabilities[j].end_time" #toTime="ngModel" name="toTime{{j}}" [timeOnly]="true" placeholder="End time"
+                        required></p-calendar>
+                    </div>
+                    <div class="ui-g-12 ui-md-1 active-btn" style="text-align:left;">
+                      <button *ngIf="(l)" class="btn btn-add-more-availability" (click)="addRow()">+</button>
+                      <button *ngIf="( j >=  existingAvailLength) && (!l)" class="btn btn-add-more-availability minus" (click)="deleteRow(j)">-</button>
+
+                    </div>
+
+                  </div>
+                </div>
+             
+              </div>
+              <div class="col-md-12 form-group update-btn p-t-20 p-r-20">
+                <!-- <button type="submit" [disabled]="f3.invalid" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder add-care-river-btn next-btn">
+              Update
+            </button> -->
+
+                <button type="submit" [disabled]="f3.touched && f3.invalid" class="btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent  m-btn--air"
+                  [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

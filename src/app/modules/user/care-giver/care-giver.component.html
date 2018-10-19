@@ -1,0 +1,58 @@
+<app-add-care-modal></app-add-care-modal>
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">
+        Care Giver
+      </h3>
+    </div>
+    <a class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder add-care-river-btn" (click)="openAddCareGiverModal('caregiver')">
+      <i class="fa fa-plus"></i> Add Care Giver
+    </a>
+  </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+  <!--Begin::Section-->
+
+  <!--End::Section-->
+  <!--Begin::Section-->
+  <div class="row care-giver-table" *ngIf ="careGiverList && toggle">
+    <div class="col-xl-12">
+      <!--begin:: Widgets/Tasks -->
+      <div class="m-portlet m-portlet--full-height">
+        <div class="m-portlet__head">
+          <div *ngIf = "careGiverList && toggle" class="m-portlet__head-caption">
+            <p-table #dt [columns]="cols" [value]="careGiverList" [paginator]="true" [rows]="10" styleClass="borderless">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngClass] = "{'width-10' : col.field =='#'}">
+                    {{col.header}}
+                    <p-sortIcon *ngIf="col.field != '#'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-l  let-i="rowIndex">
+                <tr [routerLink]="['/user/edit', l.id ]" class="cursor-pointer" >
+                  <td>{{i+1}}</td>
+                  <td>{{l.display_name}}</td>
+                  <td>{{l.contact.address}}</td>
+                  <td>{{na}}</td>
+                  <td>
+                    <span *ngFor="let s of l.services; let lt = last;">
+                      {{s.description }}
+                      <span [hidden]="lt">, </span>
+                    </span> 
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+      <!--end:: Widgets/Tasks -->
+    </div>
+  </div>
+
+</div>

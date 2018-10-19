@@ -1,0 +1,366 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog [(visible)]="display" [modal]="true" [responsive]="true" [minWidth]="auto" [width]="auto" [height]="auto" [minHeight]="auto"
+    [draggable]="false" styleClass="add-user-modal">
+    <p-header>
+        <span *ngIf="modalName"> {{modalName}} </span>
+    </p-header>
+    <form #f2="ngForm" (ngSubmit)=" f2.form.valid && addCareGiver()" class="m-login__form m-form" action="" validate id = "add_user">
+        <div *ngIf="RoleName" class="modal-steps">
+
+            <div class="modal-stepper row">
+
+                <div class="step-1 col-md-4">
+                    <div class="col-md-3 circle" [ngClass]="{ 'active' : activeId == 'basic-details'}">
+                        <span class="number">1</span>
+                    </div>
+                    <div class="text col-md-6">
+                        <span class="heading">Basic Details
+                            <br />
+                        </span>
+                        <span class="desc">Fill the basic details of the
+                            <span *ngIf="RoleName == 'Patient'">client</span>
+                            <span *ngIf="RoleName == 'Caregiver'">care giver</span>
+                        </span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="step-1 col-md-4">
+                    <div class="col-md-3 circle" [ngClass]="{'active active-two': activeId == 'speciality'}">
+                        <span class="number">2</span>
+                    </div>
+                    <div class="text col-md-6">
+                        <span class="heading">
+                            <span *ngIf="RoleName == 'Patient'">Care Plan</span>
+                            <span *ngIf="RoleName == 'Caregiver'">Speciality</span>
+                            <br />
+                        </span>
+                        <span class="desc">
+                            <span *ngIf="RoleName == 'Patient'">Choose care plan for the Patient</span>
+                            <span *ngIf="RoleName == 'Caregiver'">Choose the speciality for the Care giver</span>
+                        </span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="step-1 col-md-4">
+                    <div class="circle col-md-3" [ngClass]="{'active': activeId == 'availability'}">
+                        <span class="number">3</span>
+                    </div>
+                    <div class="text col-md-8">
+                        <span class="heading">
+                            <span *ngIf="RoleName == 'Caregiver'">Availability</span>
+                            <span *ngIf="RoleName == 'Patient'">Visit Days</span>
+                            <br />
+                        </span>
+                        <span class="desc">Mention the available day, date and time</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-content">
+            <div id="basic-details" class="tab-pane active">
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>FIRST NAME</label>
+                            <input name="firstname" [(ngModel)]="careGiverData.first_name" #firstname="ngModel" type="text" class="form-control" placeholder="First name"
+                                required>
+                            <div *ngIf="firstname.invalid && firstname.touched">
+                                <div *ngIf="firstname.errors.required" class="text-danger">
+                                    <div>First name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>MIDDLE NAME</label>
+                            <input name="middleName" [(ngModel)]="careGiverData.middle_name" #middleName="ngModel" type="text" class="form-control" placeholder="Middle name">
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>LAST NAME</label>
+                            <input name="lastName" [(ngModel)]="careGiverData.last_name" #lastName="ngModel" type="text" class="form-control" placeholder="Last name"
+                                required>
+                            <div *ngIf="lastName.invalid && lastName.touched" class="text-danger">
+                                <div *ngIf="lastName.errors.required">
+                                    <div>Last name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>DATE OF BIRTH</label>
+
+                            <p-calendar name="dateOfBirth" [(ngModel)]="careGiverData.dob" styleClass="col-md-12" placeholder="MM/DD/YYYY" required #dateOfBirth="ngModel"  [yearNavigator] = "true" yearRange = "1900:2020"
+                                inputStyleClass="form-control custom-height" (onSelect)="validateButton()"></p-calendar>
+                            <i class="fa fa-calendar date-of-birt-icon"></i>
+                            <div *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="text-danger">
+                                <div *ngIf="dateOfBirth.errors.required">
+                                    <div>Date of birth is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label>USERNAME</label>
+                            <input name="username" [(ngModel)]="careGiverData.user_name" #username="ngModel" type="text" class="form-control" placeholder="Username"
+                                required>
+                            <div *ngIf="username.invalid && username.touched" class="text-danger">
+                                <div *ngIf="username.errors.required">
+                                    <div>Username name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>DISPLAY NAME</label>
+                            <input name="displayName" [(ngModel)]="careGiverData.display_name" #displayName="ngModel" type="text" class="form-control"
+                                placeholder="Display name" required>
+                            <div *ngIf="displayName.invalid && displayName.touched" class="text-danger">
+                                <div *ngIf="displayName.errors.required">
+                                    <div>Dispaly name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>GENDER</label>
+                            <p-dropdown name="gender" [(ngModel)]="careGiverData.gender" [options]="genderArray" placeholder="Gender" optionLabel="name"
+                                (onChange)="validateButton()" #gender="ngModel" [showClear]="false" styleClass="custom-height"
+                                required></p-dropdown>
+                            <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+                                <div *ngIf="gender.errors.required">
+                                    <div>Gender is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 form-group">
+                            <label>PHOTO</label>
+                            <div class="form-control care-giver-image-upload">
+                                <input name="files" type="file" ng2FileSelect [uploader]="uploader" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>SOCIAL SECURITY NUMBER</label>
+                            <input name="ssn" [(ngModel)]="careGiverData.social_security_number" #ssn="ngModel" type="number" class="form-control" placeholder="Social security number"
+                                required>
+                            <div *ngIf="ssn.invalid && ssn.touched" class="text-danger">
+                                <div *ngIf="ssn.errors.required">
+                                    <div>Social security number name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>HOME PHONE</label>
+                            <input name="homePhone" [(ngModel)]="careGiverData.home_phone" #homePhone="ngModel" type="number" class="form-control" placeholder="Home phone"
+                                required>
+                            <div *ngIf="homePhone.invalid && homePhone.touched" class="text-danger">
+                                <div *ngIf="homePhone.errors.required">
+                                    <div>Home phone number is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>WORK PHONE</label>
+                            <input name="workPhone" [(ngModel)]="careGiverData.work_phone" #workPhone="ngModel" type="number" class="form-control" placeholder="Work phone"
+                                required>
+                            <div *ngIf="workPhone.invalid && workPhone.touched">
+                                <div *ngIf="workPhone.errors.required" class="text-danger">
+                                    <div>Work phone number is required.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>EMERGENCY CONTACT </label>
+                            <input name="emergencyContact" [(ngModel)]="careGiverData.emergency_contact" #emergencyContact="ngModel" type="number" class="form-control"
+                                placeholder="Emergency contact" required>
+                            <div *ngIf="emergencyContact.invalid && emergencyContact.touched" class="text-danger">
+                                <div *ngIf="emergencyContact.errors.required">
+                                    <div>Emergency contact number is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label>EMAIL ADDRESS </label>
+                            <input name="emailAddress" [(ngModel)]="careGiverData.primary_email" #emailAddress="ngModel" type="email" class="form-control"
+                                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                                placeholder="Email address" required>
+                            <div *ngIf="emailAddress.invalid && emailAddress.touched" class="text-danger">
+                                <div *ngIf="emailAddress.errors.required">
+                                    <div>Email address is required.</div>
+                                </div>
+                                <div *ngIf="emailAddress.errors.pattern">
+                                    <div>Email address is invalid.</div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label> ADDRESS</label>
+                            <input name="address" [(ngModel)]="careGiverData.address" #address="ngModel" type="text" class="form-control" placeholder="Address"
+                                required>
+                            <div *ngIf="address.invalid && address.touched" class="text-danger">
+                                <div *ngIf="address.errors.required">
+                                    <div>Address is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>ADDRESS 2 </label>
+                            <input name="address2" [(ngModel)]="careGiverData.address2" #address2="ngModel" type="text" class="form-control" placeholder="Address 2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label> CITY</label>
+                            <input name="city" [(ngModel)]="careGiverData.city" #city="ngModel" type="text" class="form-control" placeholder="City" required>
+                            <div *ngIf="city.invalid && city.touched" class="text-danger">
+                                <div *ngIf="city.errors.required">
+                                    <div>City name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label> PINCODE</label>
+                            <input name="pincode" [(ngModel)]="careGiverData.pincode" #pincode="ngModel" type="text" class="form-control" placeholder="Pincode"
+                                required>
+                            <div *ngIf="pincode.invalid && pincode.touched" class="text-danger">
+                                <div *ngIf="pincode.errors.required">
+                                    <div>Pincode is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label> STATE</label>
+                            <input name="state" [(ngModel)]="careGiverData.state" #state="ngModel" type="text" class="form-control" placeholder="State"
+                                required>
+                            <div *ngIf="state.invalid && state.touched" class="text-danger">
+                                <div *ngIf="state.errors.required">
+                                    <div>State name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label> COUNTRY</label>
+                            <input name="country" [(ngModel)]="careGiverData.country" #country="ngModel" type="text" class="form-control" placeholder="Country"
+                                required>
+                            <div *ngIf="country.invalid && country.touched" class="text-danger">
+                                <div *ngIf="country.errors.required">
+                                    <div>Country name is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="speciality" class="tab-pane">
+                <div class="modal-auto-complete">
+                    <!-- <div *ngIf="placeholder && placeholder =='Care plan'" class="col-md-12 form-group no-padding">
+                        <label> MEDICAL CONDITION</label>
+                        <input name="medical_condition" [(ngModel)]="careGiverData.medical_condition" #medicalcondition="ngModel" type="text" class="form-control"
+                            placeholder="Medical condition" required>
+                        <div *ngIf="medicalcondition.invalid && medicalcondition.touched" class="text-danger">
+                            <div *ngIf="medicalcondition.errors.required">
+                                <div>Medical condition is required.</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <label *ngIf="placeholder && placeholder =='Speciality'">SPECIALITY</label>
+                    <label *ngIf="placeholder && placeholder =='Care plan'">CARE PALN</label>
+                    <span class="ui-fluid ">
+                        <p-autoComplete [suggestions]="filteredSpecialities" (completeMethod)="filterSpeciality($event);" styleClass="wid100" inputStyleClass="c-h-28"
+                            [minLength]="1" placeholder="Start typing..." field="name" [multiple]="true" [(ngModel)]="careGiverData.service" 
+                            name="specialities[]" #specialities="ngModel" required>
+                        </p-autoComplete>
+                    </span>
+                    <div *ngIf="specialities.invalid && specialities.touched" class="text-danger">
+                        <div *ngIf="specialities.errors.required">
+                            <div>Please select at least one speciality.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="availability" class="tab-pane modal-availability add-user">
+                <label class="avail-label">AVAILABLILITY</label>
+                <label class="time-duration-label">TIME DURATION</label>
+                <div *ngFor="let i of availabilities; let j = index" class="row availability-row">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-1">
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <p-multiSelect [options]="weekDay" [(ngModel)]="availabilities[j].weekdays" #weekdays1="ngModel" name="weekdays1{{j}}" required
+                                [filter]="false" optionLabel="name" [maxSelectedLabels]="1" defaultLabel="Week days" required>
+                            </p-multiSelect>
+                            <div *ngIf="(weekdays1.invalid && weekdays1.touched)" class="text-danger">
+                                <div>
+                                    <div class="avail-error">Please select week days.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2 short-datepicker">
+                            <p-calendar [(ngModel)]="availabilities[j].fromDate" #fromDate="ngModel" name="fromDate{{j}}" readonlyInput="true" required
+                                placeholder="From Date"></p-calendar>
+                            <div *ngIf="(fromDate.invalid && fromDate.touched) || (toDate.invalid && toDate.touched)" class="text-danger">
+                                <div>
+                                    <div class="avail-error">Please select complete availability.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2 short-datepicker">
+                            <p-calendar [(ngModel)]="availabilities[j].toDate" #toDate="ngModel" [minDate]="availabilities[j].fromDate" name="toDate{{j}}" readonlyInput="true" required placeholder="To Date"></p-calendar>
+                            <div *ngIf="(availabilities[j].fromDate > availabilities[j].toDate) && toDate.touched" class="text-danger">
+                                <div>
+                                    <div class="avail-error">To date should be greater than from date</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <p-calendar [(ngModel)]="availabilities[j].fromTime" #fromTime="ngModel" name="fromTime{{j}}" [timeOnly]="true" placeholder="Start time"
+                                required></p-calendar>
+                            <div *ngIf="(fromTime.invalid && fromTime.touched) || (toTime.invalid && toTime.touched)" class="text-danger">
+                                <div>
+                                    <div class="avail-error">Please select complete time duration.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <p-calendar [(ngModel)]="availabilities[j].toTime" #toTime="ngModel" name="toTime{{j}}" [timeOnly]="true" placeholder="End time"
+                                required></p-calendar>
+                        </div>
+                        <div class="ui-g-12 ui-md-1" style="text-align:left;">
+                            <button *ngIf="((j+1) == rowNumbersCount) && (rowNumbersCount < 7)" class="btn btn-add-more-availability" (click)="addRow()">+</button>
+                            <button *ngIf="((j+1) < rowNumbersCount) || (rowNumbersCount == 7)" class="btn btn-add-more-availability minus" (click)="deleteRow()">-</button>
+                        </div>
+                        <!-- <div class="ui-g-12 ui-md-1">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="modal-footer">
+                <a [hidden]="activeId == 'basic-details'" class="btn btn-secondary m-btn--air" (click)="back()">
+                    Back
+                </a>
+                <button [hidden]="activeId == 'availability'" type="button" class="btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent m-btn--air"
+                    (click)="next()" id="next-btn" [disabled]="(specialities.invalid && activeId =='speciality')">
+                    Next
+                </button>
+                <button *ngIf="activeId == 'availability'" type="submit" class="btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent m-btn--air"
+                    [ngClass]="{'m-loader m-loader--right m-loader--light': loading}" [disabled]="f2.invalid">
+                    Submit
+                </button>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>

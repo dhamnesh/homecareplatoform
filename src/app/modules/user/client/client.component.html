@@ -1,0 +1,64 @@
+<app-add-care-modal ></app-add-care-modal>
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" appunwraptag="">
+    <div class="d-flex align-items-center">
+      <div class="mr-auto">
+        <h3 class="m-subheader__title">
+            Client 
+        </h3>
+      </div>
+      <a  class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder add-care-river-btn" (click) = "openAddCareGiverModal('client')">
+        <i class="fa fa-plus"></i> Add Client
+      </a>
+    </div>
+  </div>
+  <!-- END: Subheader -->
+  <div class="m-content">
+    <!--Begin::Section-->
+    
+    <!--End::Section-->  <!--Begin::Section-->
+    <div class="row care-giver-table" *ngIf ="clientList && toggle">
+      <div class="col-xl-12">
+        <div class="m-portlet m-portlet--full-height">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption" *ngIf = "clientList && toggle">
+              <p-table [columns]="cols" [value]="clientList" [paginator]="true" [rows]="10" styleClass="borderless">
+                  <ng-template pTemplate="header" let-columns>
+                    <!-- <tr>
+                            <th [pSortableColumn]="" >Name <p-sortIcon [field]="Name"></p-sortIcon></th>
+                            <th [pSortableColumn]="address">Address  <p-sortIcon [field]="address"></p-sortIcon></th>
+                            <th>Speciality</th>
+                            <th>Availability</th>
+                        </tr> -->
+                    <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass] = "{'width-10' : col.field =='#'}">
+                        {{col.header}}
+                        <p-sortIcon *ngIf="col.field != '#'" [field]="col.field"></p-sortIcon>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-l  let-i="rowIndex">
+                    <tr [routerLink]="['/user/edit', l.id ]" class="cursor-pointer">
+                      <td>{{i+1}}</td>
+                      <td>{{l.display_name}}</td>
+                      <td>{{l.contact.address}}</td>
+                      <td>{{na}}</td>
+                      <td>
+                        <span *ngFor="let s of l.services; let lt = last;">
+                          {{s.description }}
+                          <span [hidden]="lt">, </span>
+                        </span> 
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+            </div>
+          </div>				
+        </div>
+        <!--end:: Widgets/Tasks -->
+      </div>
+    </div>
+      
+  </div>
+  

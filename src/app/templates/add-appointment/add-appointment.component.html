@@ -1,0 +1,163 @@
+<p-growl [(value)]="msgs"></p-growl>
+<p-dialog [(visible)]="display" [modal]="true" [responsive]="true" [minWidth]="auto" [width]="auto" [height]="auto" [minHeight]="auto"
+    [draggable]="false" styleClass="add-user-modal">
+    <p-header>
+        <span> Add appointment </span>
+    </p-header>
+    <form #f2="ngForm" (ngSubmit)=" f2.form.valid && addAppointment()" class="m-login__form m-form" action="" validate>
+        <!-- <div class="modal-steps">
+            <div class="modal-stepper row">
+                <div class="step-1 col-md-6">
+                    <div class="col-md-3 circle" [ngClass]="{'active': activeId == 'appointment'}">
+                        <span class="number">1</span>
+                    </div>
+                    <div class="text col-md-6">
+                        <span class="heading">Appointment Details
+                            <br />
+                        </span>
+                        <span class="desc">Fill the schedule details of the appointment</span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="step-1 col-md-6">
+                    <div class="col-md-3 circle" [ngClass]="{'active active-two': activeId == 'caregiver'}">
+                        <span class="number">2</span>
+                    </div>
+                    <div class="text col-md-6">
+                        <span class="heading">
+                            <span *ngIf="RoleName == 'Patient'">Select Caregiver</span>                 
+                            <br />
+                        </span>
+                        <span class="desc">
+                            Choose the Care giver
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="tab-content" *ngIf="currentClient">
+            <div id="appointment" class="tab-pane active modal-appointment add-user temp">
+
+               <!-- row for client name -->
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label>CLIENT NAME</label>
+                      <input name="lastName" type="text" class="form-control" placeholder="Last name"  [value]="currentClient.display_name" required
+                        readonly>
+                    </div>
+                  </div>
+
+                  <!-- //row for care plan -->
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label>CARE PLAN</label>
+                      <span class="ui-fluid">
+                        <p-autoComplete [suggestions]="filteredSpecialities" (completeMethod)="filterSpeciality($event);" styleClass="wid100" [minLength]="1"
+                          placeholder="Care plan" field="name" [multiple]="true" name="specialities[]" [(ngModel)]="currentClient.services"
+                          field="description" required readonly>
+                        </p-autoComplete>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="availabilities">
+                    <div class="col-md-12">
+                      <!-- {{ availabilities | json}} -->
+                        <label>SCHEDULE</label>
+                        <div *ngFor="let i of availabilities; let j = index"> 
+                            <div class="ui-g ui-fluid">
+                                <!-- <div class="ui-g-12 ui-md-1">
+                                </div> -->
+                                <div class="ui-g-12 ui-md-3">
+                                    <p-multiSelect [options]="weekDay" [(ngModel)]="availabilities[j].weekDays" #weekdays1="ngModel" name="weekdays1{{j}}" required
+                                        [filter]="false" optionLabel="name" [maxSelectedLabels]="1" defaultLabel="Week days" required>
+                                    </p-multiSelect>
+                                    <div *ngIf="(weekdays1.invalid && weekdays1.touched)" class="text-danger">
+                                        <div>
+                                            <div class="avail-error">Please select week days.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-2 short-datepicker">
+                                    <p-calendar [(ngModel)]="availabilities[j].fromDate" #fromDate="ngModel" name="fromDate{{j}}" readonlyInput="true" required
+                                        placeholder="From Date"></p-calendar>
+                                    <div *ngIf="(fromDate.invalid && fromDate.touched)|| (toDate.invalid && toDate.touched)" class="text-danger">
+                                        <div>
+                                            <div class="avail-error">Please select complete availability.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-2 short-datepicker">
+                                    <p-calendar [(ngModel)]="availabilities[j].toDate" #toDate="ngModel" name="toDate{{j}}" readonlyInput="true" required placeholder="To Date"></p-calendar>
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <p-calendar [(ngModel)]="availabilities[j].fromTime" #fromTime="ngModel" name="fromTime{{j}}" [timeOnly]="true" placeholder="Start time"
+                                        required></p-calendar>
+                                    <div *ngIf="(fromTime.invalid && fromTime.touched) || (toTime.invalid && toTime.touched)" class="text-danger">
+                                        <div>
+                                            <div class="avail-error">Please select complete time duration.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-2">
+                                    <p-calendar [(ngModel)]="availabilities[j].toTime" #toTime="ngModel" name="toTime{{j}}" [timeOnly]="true" placeholder="End time"
+                                        required></p-calendar>
+                                </div>
+                                <!-- <div class="ui-g-12 ui-md-1" style="text-align:left;">
+                                    <button *ngIf="((j+1) == rowNumbersCount) && (rowNumbersCount < 7)" class="btn btn-add-more-availability" (click)="addRow()">+</button>
+                                    <button *ngIf="((j+1) < rowNumbersCount) || (rowNumbersCount == 7)" class="btn btn-add-more-availability minus" (click)="deleteRow()">-</button>
+                                </div> -->
+
+                                <div class="col-md-12" *ngIf="availabilities[j].caregiverDetails">
+                                    <label>AVAILABLE CAREGIVER / AVAILABLE ON</label>
+                                </div> 
+                                <div class="col-md-12" *ngIf="availabilities[j].caregiverDetails">
+                                    <div class="ui-g-12 ui-md-3" *ngFor="let k of availabilities[j].caregiverDetails; let d = index">
+                                        <input type="checkbox" [(ngModel)]= "availabilities[j].caregiverDetails[d].caregiver_id"  name="caregiver_id{{j}}" #caregiverId value="{{availabilities[j].caregiverDetails[d].user_id}}" (change)="addCareGiver(caregiverId.value, d)">&nbsp;&nbsp;&nbsp;
+                                        <span>{{availabilities[j].caregiverDetails[d].display_name}}</span>
+                                    </div><br>
+                                </div>
+                                <!-- <div class="ui-g-12 ui-md-1">
+                                </div> -->
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                  </div>              
+            </div>
+            <!-- <div id="caregiver" class="tab-pane temp">
+                <div class="modal-auto-complete">
+                    <div class="col-md-12 form-group no-padding">
+                        <label>MEDICAL CONDITION</label>
+                        <input name="medical_condition"  type="text" class="form-control"
+                            placeholder="Medical condition" required>
+                        <div *ngIf="medicalcondition.invalid && medicalcondition.touched" class="text-danger">
+                            <div *ngIf="medicalcondition.errors.required">
+                                <div>Medical condition is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+
+        <p-footer>
+            <div class="modal-footer">
+                <!-- <a [hidden]="activeId == 'appointment'" class="btn btn-secondary m-btn--air" (click)="back()">
+                    Back
+                </a>
+                <button [hidden]="activeId == 'caregiver'" type="button" class="btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent m-btn--air"
+                    (click)="next()" id="next-btn"  [disabled]="(avail-error)">
+                    Next
+                </button> -->
+                <button *ngIf="activeId == 'appointment'" type="submit" class="btn m-btn m-btn--gradient-from-success m-btn--gradient-to-accent m-btn--air"
+                    [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">
+                    Submit
+                </button>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>
